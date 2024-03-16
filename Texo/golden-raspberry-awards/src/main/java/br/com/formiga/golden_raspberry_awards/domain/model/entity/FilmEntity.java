@@ -13,12 +13,16 @@ import java.io.*;
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Builder(access = AccessLevel.PUBLIC)
+@Getter(value = AccessLevel.PUBLIC)
+@Setter(value = AccessLevel.PUBLIC)
+@EqualsAndHashCode
+@ToString
+@Builder(access = AccessLevel.PUBLIC, toBuilder = true)
 public class FilmEntity implements Serializable {
 
 	private static final long serialVersionUID = -4719703680543447808L;
 
-//	@Column(name = "id", nullable = false)
+	@Column(name = "id", nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
