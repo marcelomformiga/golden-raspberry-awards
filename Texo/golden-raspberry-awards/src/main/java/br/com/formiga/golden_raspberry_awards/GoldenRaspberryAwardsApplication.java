@@ -1,7 +1,10 @@
+
 package br.com.formiga.golden_raspberry_awards;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @SpringBootApplication
 public class GoldenRaspberryAwardsApplication {
