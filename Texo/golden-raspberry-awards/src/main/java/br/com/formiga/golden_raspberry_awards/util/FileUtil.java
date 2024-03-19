@@ -38,11 +38,7 @@ public class FileUtil {
 
 			bufferedReader.close();
 
-//			this.getFilmesAtivos(films).forEach(System.out::println);
-
-			for (FilmDTO filmDTO : this.getFilmesAtivos(films)) {
-				System.out.println(filmDTO.getReleaseYear().toString().concat(" - ").concat(filmDTO.getTitle().concat( " - ").concat(filmDTO.getProducers().concat(" - ").concat(filmDTO.getWinner().toString()))));
-			}
+			final List<String> producers = films.stream().map(this::getWinnersProducers(films)).collect(Collectors.toList());
 
 		} catch (Exception e) {
 			System.err.println("Failed to read file CSV: " + e.getMessage());
@@ -67,8 +63,17 @@ public class FileUtil {
 		return filmDTO;
 	}
 
-	private List<FilmDTO> getFilmesAtivos(final List<FilmDTO> filmes) {
-		return filmes.stream().filter(FilmDTO::getWinner).collect(Collectors.toList());
+	private List<String> getWinnersProducers(List<String> producers) {
+
+		List<String> splitedProducers = new ArrayList<>();
+
+		for (String producer : producers) {
+			String partes[] = producer.split(", | and ");
+
+			splitedProducers.addAll(Arrays.asList(partes));
+		}
+
+		return splitedProducers;
 	}
 
 }
