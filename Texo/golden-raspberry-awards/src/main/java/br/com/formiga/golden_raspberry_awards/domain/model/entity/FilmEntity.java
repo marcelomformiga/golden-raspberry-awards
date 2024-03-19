@@ -36,7 +36,10 @@ public class FilmEntity implements Serializable {
 	@Column(name = "studio", nullable = false, length = 250)
 	private String studio;
 
-	@Column(name = "producer", nullable = false, length = 250)
-	private String producer;
+	@Column(name = "producers", nullable = false, length = 250)
+	private String producers;
+
+	@Column(name = "winner")
+	private Boolean winner;
 
 }

@@ -7,6 +7,7 @@ import br.com.formiga.golden_raspberry_awards.service.*;
 import jakarta.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.util.*;
 
 import java.io.*;
 import java.util.*;
@@ -26,21 +27,25 @@ public class FileUtil {
 		try {
 
 			InputStream inputStream = getClass().getResourceAsStream("/movies-list.csv");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-			List<FilmDTO> films = reader.lines()
+			List<FilmDTO> films = bufferedReader.lines()
 					.skip(1)
 					.map(this::getLine)
 					.collect(Collectors.toList());
 
-			for (FilmDTO filmDTO : films) {
-				this.filmService.save(filmDTO);
+			films.stream().forEach(filmDTO -> this.filmService.save(filmDTO));
+
+			bufferedReader.close();
+
+//			this.getFilmesAtivos(films).forEach(System.out::println);
+
+			for (FilmDTO filmDTO : this.getFilmesAtivos(films)) {
+				System.out.println(filmDTO.getReleaseYear().toString().concat(" - ").concat(filmDTO.getTitle().concat( " - ").concat(filmDTO.getProducers().concat(" - ").concat(filmDTO.getWinner().toString()))));
 			}
 
-			reader.close();
-
 		} catch (Exception e) {
-			System.err.println("Erro ao ler arquivo CSV: " + e.getMessage());
+			System.err.println("Failed to read file CSV: " + e.getMessage());
 		}
 
 	}
@@ -49,12 +54,21 @@ public class FileUtil {
 
 		final String fields[] = line.split(";");
 
-		return FilmDTO.builder()
+		final Boolean winner = ((fields.length > 4) && (StringUtils.hasLength(fields[4])) && (fields[4].equals("yes"))) ? Boolean.TRUE : Boolean.FALSE;
+
+		FilmDTO filmDTO = FilmDTO.builder()
 				.releaseYear(Integer.parseInt(fields[0]))
 				.title(fields[1])
 				.studio(fields[2])
-				.producer(fields[3])
+				.producers(fields[3])
+				.winner(winner)
 				.build();
+
+		return filmDTO;
+	}
+
+	private List<FilmDTO> getFilmesAtivos(final List<FilmDTO> filmes) {
+		return filmes.stream().filter(FilmDTO::getWinner).collect(Collectors.toList());
 	}
 
 }

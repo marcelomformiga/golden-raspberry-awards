@@ -13,7 +13,19 @@ public class FilmDTOMock {
 				.releaseYear(1980)
 				.title("The Formula")
 				.studio("MGM")
-				.producer("United Artists")
+				.producers("United Artists")
+				.winner(Boolean.FALSE)
+				.build();
+	}
+
+	public static FilmDTO mockFilmDTOWinner() {
+
+		return FilmDTO.builder()
+				.releaseYear(1981)
+				.title("Mommie Dearest")
+				.studio("Paramount Pictures")
+				.producers("Frank Yablans")
+				.winner(Boolean.TRUE)
 				.build();
 	}
 

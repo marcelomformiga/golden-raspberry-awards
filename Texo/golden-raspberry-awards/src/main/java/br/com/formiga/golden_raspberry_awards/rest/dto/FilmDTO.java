@@ -30,8 +30,12 @@ public class FilmDTO {
 	private String studio;
 
 	@Transient
-	@NotNull(message = "[Producer] cannot be null!")
-	@Size(min = 1, max = 250, message = "[Producer] maximum size must be 250!")
-	private String producer;
+	@NotNull(message = "[Producers] cannot be null!")
+	@Size(min = 1, max = 250, message = "[Producer]s maximum size must be 250!")
+	private String producers;
+
+	@Transient
+	@NotNull(message = "[Winner] cannot be null!")
+	private Boolean winner;
 
 }

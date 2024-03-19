@@ -17,7 +17,22 @@ public class FilmEntityMock {
 				.releaseYear(filmDTO.getReleaseYear())
 				.title(filmDTO.getTitle())
 				.studio(filmDTO.getStudio())
-				.producer(filmDTO.getProducer())
+				.producers(filmDTO.getProducers())
+				.winner(filmDTO.getWinner())
+				.build();
+	}
+
+	public static FilmEntity mockFilmEntityWinner() {
+
+		final FilmDTO filmDTO = FilmDTOMock.mockFilmDTOWinner();
+
+		return FilmEntity.builder()
+				.id(2L)
+				.releaseYear(filmDTO.getReleaseYear())
+				.title(filmDTO.getTitle())
+				.studio(filmDTO.getStudio())
+				.producers(filmDTO.getProducers())
+				.winner(filmDTO.getWinner())
 				.build();
 	}
 
