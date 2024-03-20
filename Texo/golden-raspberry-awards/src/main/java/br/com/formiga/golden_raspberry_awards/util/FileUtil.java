@@ -5,6 +5,7 @@ package br.com.formiga.golden_raspberry_awards.util;
 import br.com.formiga.golden_raspberry_awards.rest.dto.*;
 import br.com.formiga.golden_raspberry_awards.service.*;
 import jakarta.annotation.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.util.*;
@@ -17,6 +18,8 @@ import java.util.stream.*;
 @Component
 public class FileUtil {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class);
+
 	@Autowired
 	private FilmService filmService;
 
@@ -26,10 +29,12 @@ public class FileUtil {
 
 		try {
 
-			InputStream inputStream = getClass().getResourceAsStream("/movies-list.csv");
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+			LOGGER.debug("Reading file.");
 
-			List<FilmDTO> films = bufferedReader.lines()
+			final InputStream inputStream = getClass().getResourceAsStream("/movies-list.csv");
+			final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+			final List<FilmDTO> films = bufferedReader.lines()
 					.skip(1)
 					.map(this::getLine)
 					.collect(Collectors.toList());
@@ -38,18 +43,18 @@ public class FileUtil {
 
 			bufferedReader.close();
 
-			final List<String> producers = films.stream().map(this::getWinnersProducers(films)).collect(Collectors.toList());
-
-		} catch (Exception e) {
-			System.err.println("Failed to read file CSV: " + e.getMessage());
+		} catch (final Exception exception) {
+			LOGGER.error("Failed to read file CSV: " + exception.getMessage());
 		}
 
 	}
 
 	private FilmDTO getLine(final String line) {
 
+		LOGGER.debug("Read a line and then split the fields.");
 		final String fields[] = line.split(";");
 
+		LOGGER.debug("Validate either it is a winner or not.");
 		final Boolean winner = ((fields.length > 4) && (StringUtils.hasLength(fields[4])) && (fields[4].equals("yes"))) ? Boolean.TRUE : Boolean.FALSE;
 
 		FilmDTO filmDTO = FilmDTO.builder()
@@ -61,19 +66,6 @@ public class FileUtil {
 				.build();
 
 		return filmDTO;
-	}
-
-	private List<String> getWinnersProducers(List<String> producers) {
-
-		List<String> splitedProducers = new ArrayList<>();
-
-		for (String producer : producers) {
-			String partes[] = producer.split(", | and ");
-
-			splitedProducers.addAll(Arrays.asList(partes));
-		}
-
-		return splitedProducers;
 	}
 
 }

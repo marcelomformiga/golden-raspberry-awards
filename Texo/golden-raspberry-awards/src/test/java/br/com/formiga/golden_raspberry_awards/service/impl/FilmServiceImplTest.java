@@ -76,7 +76,6 @@ class FilmServiceImplTest {
 		Assertions.assertEquals(filmDTOWinner.getProducers(), response.get(1).getProducers(), "[12] Objects must be equals!");
 		Assertions.assertEquals(filmDTOWinner.getWinner(), response.get(1).getWinner(), "[13] Objects must be equals!");
 
-
 		Mockito.verify(this.filmRepositoryMock, Mockito.times(1)).findAll();
 	}
 

@@ -25,7 +25,7 @@ public class WinnerDTO {
 	@NotNull(message = "[Interval] cannot be null!")
 	@Size(min = 1, max = 99, message = "[Interval] must be size min 1 and max 99!")
 	@JsonProperty(value = "interval", required = true, access = JsonProperty.Access.READ_ONLY)
-	private Short interval;
+	private Integer interval;
 
 	@Transient
 	@NotNull(message = "[Previous Win] cannot be null!")
