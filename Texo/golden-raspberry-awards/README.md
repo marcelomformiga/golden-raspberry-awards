@@ -85,7 +85,7 @@ http://localhost:8080/awards/winners-range
 
 MÉTODO HTTP: GET
 
-curl -X GET http://localhost:8080/filmes
+curl -X GET http://localhost:8080/awards/winners-range
 
 ## Pontos de melhoria para implementação futura
 Alguns pontos de melhoria e sugestões para continuar o desenvolvimento da aplicação:
