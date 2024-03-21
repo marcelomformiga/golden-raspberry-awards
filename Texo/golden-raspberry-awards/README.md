@@ -27,17 +27,15 @@ Na camada de domínio estão as entidades mapeadas do banco de dados e os reposi
 Segue abaixo a estrutura de pacotes:
 
 golden_raspberry_awards
-|___ rest
-        |____ controller
-        |____ dto
-|____ domain
-        |____ model
-        |____ repository
-|____ service
-        |____ impl
-|____ business
-        |____ impl
-|____ util
+1) rest
+1.1) controller
+1.2) dto
+2) domain
+2.1) model
+2.2) repository
+3) service
+4) business
+5) util
 
 - REST: Possui os recursos necessários da API que são as portas de entrada e saída da mesma. Dividido em 2 outros pacotes.
 - CONTROLLER: Recursos de classes controladoras onde estão os endpoints do sistema.
