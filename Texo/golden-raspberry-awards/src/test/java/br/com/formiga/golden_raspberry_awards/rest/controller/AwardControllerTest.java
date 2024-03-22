@@ -37,6 +37,8 @@ class AwardControllerTest {
 
 		Mockito.when(this.awardsServiceMock.getWinnersByRange()).thenReturn(winnerPrizeRangeDTO);
 
+		int i = 0;
+
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/awards/winners-range")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())

@@ -31,7 +31,7 @@ public class FileUtil {
 
 			LOGGER.debug("Reading file.");
 
-			final InputStream inputStream = getClass().getResourceAsStream("/movies-list.csv");
+			final InputStream inputStream = super.getClass().getResourceAsStream("/movies-list.csv");
 			final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
 			final List<FilmDTO> films = bufferedReader.lines()
@@ -46,7 +46,6 @@ public class FileUtil {
 		} catch (final Exception exception) {
 			LOGGER.error("Failed to read file CSV: " + exception.getMessage());
 		}
-
 	}
 
 	private FilmDTO getLine(final String line) {
