@@ -78,6 +78,11 @@ SELECT * FROM FILM;
 Ao inicializar sem erros a API, executando a classe "GoldenRaspberryAwardsApplication" que está no pacote raiz, subirá uma base de dados H2 em memória (ver seção acima "Base de Dados") e o sistema já automaticamente executará o método "readFIle" (com a anotação "@PostConstruct") da classe "FileUtil", lendo assim o arquivo CSV para popular a base de dados referida.
 A API foi configurada para rodar no endereço "localhost" na porta "8080".
 
+### Passos
+1) Baixar o projeto do repositório (ver seção "REPOSITÓRIO GITHUB").
+2) Para compilar o projeto e executar todos os testes (incluindo a validação de alteração do arquivo CSV), em um terminal CMD execute o comando: "mvn clean install".
+3) Após a compilação, para subir a aplicação, vá ao terminal CMD e execute o comando: "mvn spring-boot:run".
+
 ### Endpoint para recuperar os vencedores do prêmio por período
 Para executar, pode fazer uso de um programa como o "Postman" ou até mesmo digitar o endpoint diretamente em seu navegador.
 
@@ -91,13 +96,8 @@ curl -X GET http://localhost:8080/awards/winners-range
 Alguns pontos de melhoria e sugestões para continuar o desenvolvimento da aplicação:
 
 - Aprimorar e aplicar um melhor manipulamento para tratamento de exceções.
+- Aplicar uma documentação e utilizar o Swagger.
 - Aplicar conceitos do SOLID na arquitetura, principalmente no pacote "BUSINESS" e classes utilitárias.
 - Cobrir classes com mais testes unitários, principalmente explorando os fluxos de exceção.
 - Aplicar logs para serem salvos em arquivos textos.
-- Lógica do código que percorre os vencedores para verificar o intervalo de prêmios pode ser otimizado ainda. 
-
-
-
-
-
-
+- Lógica do código que percorre os vencedores para verificar o intervalo de prêmios pode ser otimizado ainda.
