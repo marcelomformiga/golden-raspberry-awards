@@ -25,8 +25,9 @@ public class FileUtil {
 
 
 	@PostConstruct
-	public void readFile() {
+	public List<FilmDTO> readFile() {
 
+		List<FilmDTO> films = new ArrayList<>();
 		try {
 
 			LOGGER.debug("Reading file.");
@@ -34,7 +35,7 @@ public class FileUtil {
 			final InputStream inputStream = super.getClass().getResourceAsStream("/movies-list.csv");
 			final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-			final List<FilmDTO> films = bufferedReader.lines()
+			films = bufferedReader.lines()
 					.skip(1)
 					.map(this::getLine)
 					.collect(Collectors.toList());
@@ -46,6 +47,8 @@ public class FileUtil {
 		} catch (final Exception exception) {
 			LOGGER.error("Failed to read file CSV: " + exception.getMessage());
 		}
+
+		return films;
 	}
 
 	private FilmDTO getLine(final String line) {

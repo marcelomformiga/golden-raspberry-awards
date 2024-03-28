@@ -30,6 +30,11 @@ public class AwardsBusinessImpl implements AwardsBusiness {
 
 		final List<FilmDTO> winners = this.filmService.getAll().stream().filter(FilmDTO::getWinner).collect(Collectors.toList());
 
+		return AwardsBusinessImpl.mountWinnersList(winners);
+	}
+
+	public static WinnerPrizeRangeDTO mountWinnersList(List<FilmDTO> winners) {
+
 		Multimap<Integer, String> producersByYear = AwardsBusinessImpl.splitProducersIndividually(winners);
 
 		List<WinnerDTO> min = new ArrayList<>();
@@ -79,7 +84,6 @@ public class AwardsBusinessImpl implements AwardsBusiness {
 					yearToCompare = producerToCompare.getKey();
 				}
 			}
-
 		}
 
 		return WinnerPrizeRangeDTO.builder()
@@ -94,7 +98,7 @@ public class AwardsBusinessImpl implements AwardsBusiness {
 	 * @param winners
 	 * @return
 	 */
-	private static ListMultimap<Integer, String> splitProducersIndividually(List<FilmDTO> winners) {
+	public static ListMultimap<Integer, String> splitProducersIndividually(List<FilmDTO> winners) {
 
 		LOGGER.debug("Splitting the producers individually by year where there are more than one winner.");
 
