@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class AwardController {
 
 	@Autowired
-	private AwardsBusiness awardsService;
+	private AwardsBusiness awardsBusiness;
 
 
 	@GetMapping(path = "/winners-range", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<WinnerPrizeRangeDTO> getWinnersByRange() {
 
-		return ResponseEntity.ok(this.awardsService.getWinnersByRange());
+		return ResponseEntity.ok(this.awardsBusiness.getWinnersByRange());
 	}
 
 }

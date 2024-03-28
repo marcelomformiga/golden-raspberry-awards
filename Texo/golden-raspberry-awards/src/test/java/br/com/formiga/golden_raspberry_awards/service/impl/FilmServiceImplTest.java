@@ -64,7 +64,7 @@ class FilmServiceImplTest {
 
 		Assertions.assertNotNull(response, "[1] Response cannot be null!");
 		Assertions.assertFalse(response.isEmpty(), "[2] List cannot be empty!");
-		Assertions.assertTrue(response.size() == 2, "[3] List must has size 2!");
+		Assertions.assertTrue(response.size() == 2, "[3] List must be size 2!");
 		Assertions.assertEquals(filmDTO.getTitle(), response.get(0).getTitle(), "[4] Objects must be equals!");
 		Assertions.assertEquals(filmDTO.getReleaseYear(), response.get(0).getReleaseYear(), "[5] Objects must be equals!");
 		Assertions.assertEquals(filmDTO.getStudio(), response.get(0).getStudio(), "[6] Objects must be equals!");
